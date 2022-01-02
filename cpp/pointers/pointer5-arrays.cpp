@@ -39,3 +39,15 @@ int main(){
 
 	return 0;
 }
+
+
+
+/**
+
+int A[5];
+
+*(A+i) is same as A[i]
+
+(A+i)  is same as &A[i]
+
+*/
