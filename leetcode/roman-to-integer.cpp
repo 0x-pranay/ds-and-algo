@@ -8,31 +8,24 @@ class Solution{
 			int totalValue = 0;
 			int currentValue;
 			int previousValue = 0;
+			
+			char current;
+			char romanAlp[] = {
+				'I', 'V', 'X',
+				'L', 'C', 'D', 'M'
+			};
+			int romanNum[] = { 1, 5, 10, 50, 100, 500, 1000};
+			int size = sizeof(romanNum)/sizeof(int);
 
 			for(int i =0; s[i] != '\0'; i++){
 				current = s[i];
+				for(int j =0; j<size; j++){
+					if(romanAlp[j] == current){
+						currentValue = romanNum[j];
+						break;
+					}
+				}
 
-				if(current == 'I'){
-					currentValue = 1;
-				}
-				if(current == 'V'){
-					currentValue = 5;
-				}
-				if(current == 'X'){
-					currentValue = 10;
-				}
-				if(current == 'L'){
-					currentValue = 50;
-				}
-				if(current == 'C'){
-					currentValue = 100;
-				}
-				if(current == 'D'){
-					currentValue = 500;
-				}
-				if(current == 'M'){
-					currentValue = 1000;
-				}
 				if(currentValue <= previousValue){
 					totalValue += currentValue;
 				}
