@@ -18,64 +18,50 @@ class Solution
 public:
 	ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
 	{
+		if (list1 == NULL)
+			return list2;
+		if (list2 == NULL)
+			return list1;
+
 		ListNode *result = NULL;
 		ListNode *ptr1 = list1;
 		ListNode *ptr2 = list2;
 		ListNode *ptr;
 
+		if (ptr1->val <= ptr2->val)
+		{
+			result = new ListNode(ptr1->val);
+			ptr1 = ptr1->next; //inc ptr1
+		}
+		else
+		{
+			result = new ListNode(ptr2->val);
+			ptr2 = ptr2->next;
+		}
+		ptr = result;
+
 		while (ptr1 != NULL && ptr2 != NULL)
 		{
-			if (result == NULL) // handle first node
+			if (ptr1->val <= ptr2->val)
 			{
-				if (ptr1->val <= ptr2->val)
-				{
-					cout << "HERE-1" << endl;
-					result = new ListNode(ptr1->val);
-					ptr1 = ptr1->next; //inc ptr1
-				}
-				else
-				{
-					result = new ListNode(ptr2->val);
-					ptr2 = ptr2->next;
-				}
-				ptr = result;
+				ptr->next = new ListNode(ptr1->val);
+				ptr1 = ptr1->next;
 			}
 			else
 			{
-				if (ptr1->val <= ptr2->val)
-				{
-					ptr->next = new ListNode(ptr1->val);
-					ptr1 = ptr1->next;
-				}
-				else
-				{
-					ptr->next = new ListNode(ptr2->val);
-					ptr2 = ptr2->next;
-				}
-				ptr = ptr->next;
+				ptr->next = new ListNode(ptr2->val);
+				ptr2 = ptr2->next;
 			}
+			ptr = ptr->next;
 		}
-		if (ptr1 == NULL && ptr2 != NULL)
+
+		if (ptr1 == NULL)
 		{
-			if (result == NULL)
-			{
-				result = ptr2;
-			}
-			else
-			{
-				ptr->next = ptr2;
-			}
+			ptr->next = ptr2;
 		}
-		if (ptr2 == NULL && ptr1 != NULL)
+		else
 		{
-			if (result == NULL)
-			{
-				result = ptr1;
-			}
-			else
-			{
-				ptr->next = ptr1;
-			}
+			ptr->next = ptr1;
 		}
 		return result;
 	}
@@ -123,7 +109,7 @@ int main()
 {
 	Solution sol;
 	// sol.mergeTwoLists()
-	int list1[] = {1, 2, 5, 10, 100};
+	int list1[] = {};
 	int list2[] = {1, 4, 8};
 
 	ListNode *linkedList1 = sol.createList(list1, sizeof(list1) / sizeof(int));
