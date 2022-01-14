@@ -51,6 +51,31 @@ public:
 		}
 		cout << endl;
 	}
+
+	bool isEmpty()
+	{
+		if (size > 0)
+			return true;
+		return false;
+	}
+
+	int at(int index)
+	{
+		if (index <= size)
+		{
+			return *(data + index);
+		}
+		cout << "Index out of bound. TODO throw an error";
+		return 0;
+	}
+
+	// todo:
+	// insert(index, item)
+	// prepend(item) insert item at index 0
+	// pop() remove from end and return that value
+	// delete(index) remove an item at the given index
+	// remove(item) - looks for that items and removes at multiple places
+	// find(item) - looks for that item and returns the first index, -1 if not found;
 };
 
 int main()
