@@ -69,11 +69,50 @@ public:
 		return 0;
 	}
 
+	void insert(int index, int item)
+	{
+		if (index >= size)
+		{
+			cout << "Error: Index out of bound" << endl;
+			return;
+		}
+		int temp2 = item;
+		int temp;
+		for (int i = index; i < size; i++)
+		{
+			temp = *(data + i);
+			*(data + i) = temp2;
+			temp2 = temp;
+		}
+		push_back(temp2);
+		return;
+	}
+
+	void prepend(int item)
+	{
+		insert(0, item);
+		return;
+	}
+
+	int pop()
+	{
+		int last_elem = *(data + size - 1);
+		size--;
+		return last_elem;
+	}
+
+	void del(int index)
+	{
+		for (int i = index; i < size; i++)
+		{
+			*(data + i) = *(data + i + 1);
+		}
+		size--;
+		return;
+	}
+
 	// todo:
-	// insert(index, item)
-	// prepend(item) insert item at index 0
-	// pop() remove from end and return that value
-	// delete(index) remove an item at the given index
+	// del(index) remove an item at the given index
 	// remove(item) - looks for that items and removes at multiple places
 	// find(item) - looks for that item and returns the first index, -1 if not found;
 };
@@ -96,6 +135,17 @@ int main()
 	v.push_back(40);
 	cout << "v.size: " << v.size << endl;
 	cout << "v.capacity " << v.capacity << endl;
+	v.display();
+
+	v.insert(0, 100);
+	v.display();
+	v.insert(0, 200);
+	v.display();
+	v.prepend(300);
+	v.display();
+	cout << v.pop() << endl;
+	v.display();
+	v.del(0);
 	v.display();
 	return 0;
 }
